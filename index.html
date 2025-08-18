@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCAM - Controle de Amostras</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app-container">
+        <header>
+            <h1>SCAM</h1>
+            <nav>
+                <button data-view="dashboard" class="active">Dashboard</button>
+                <button data-view="inventory">Inventário</button>
+                <button data-view="reports">Relatórios</button>
+            </nav>
+        </header>
+
+        <main>
+            <section id="dashboard-view" class="view active">
+                <div class="main-actions">
+                    <button id="btn-show-receber" class="action-btn receive">Receber Amostra</button>
+                    <button id="btn-show-entregar" class="action-btn deliver">Entregar Amostra</button>
+                </div>
+
+                <div class="dashboard-section">
+                    <h2><i class="icon"></i>Vencimentos Próximos</h2>
+                    <div id="vencimentos-list" class="list-container">
+                        </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h2><i class="icon"></i>Próximos Lembretes</h2>
+                    <div id="lembretes-list" class="list-container">
+                        </div>
+                </div>
+            </section>
+
+            <section id="inventory-view" class="view">
+                <h2>Inventário de Amostras</h2>
+                <div class="filters">
+                    <input type="text" id="search-inventory" placeholder="Buscar por remédio, substância...">
+                    <select id="filter-vencimento">
+                        <option value="">Vencimento</option>
+                        <option value="30">Vence em 30 dias</option>
+                        <option value="60">Vence em 60 dias</option>
+                        <option value="90">Vence em 90 dias</option>
+                    </select>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Remédio</th>
+                                <th>Qtd.</th>
+                                <th>Validade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+             <section id="reports-view" class="view">
+                <h2>Relatórios</h2>
+                <p>Funcionalidade de relatórios em desenvolvimento.</p>
+                <button id="export-vencidos-btn">Exportar Vencidos para Excel</button>
+            </section>
+        </main>
+        
+        <div id="modal-backdrop" class="hidden">
+            <div id="receber-modal" class="modal-content hidden">
+                <form id="form-receber">
+                    <h3>Receber Nova Amostra</h3>
+                    <input type="text" name="Remedio" placeholder="Nome do Remédio" required list="remedio-datalist">
+                    <input type="text" name="Substancia" placeholder="Substância" list="substancia-datalist">
+                    <input type="text" name="Categoria" placeholder="Categoria" list="categoria-datalist">
+                    <div class="switch-field">
+                        <span>Amostra</span>
+                        <label class="switch">
+                            <input type="checkbox" name="Tipo" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Original</span>
+                    </div>
+                    <input type="text" name="Laboratorio" placeholder="Laboratório" list="laboratorio-datalist">
+                    <input type="text" name="Representante" placeholder="Representante" list="representante-datalist">
+                    <input type="number" name="Quantidade" placeholder="Quantidade Recebida" required>
+                    <input type="date" name="DataValidade" placeholder="Data de Validade" required>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="entregar-modal" class="modal-content hidden">
+                <form id="form-entregar">
+                    <h3>Entregar Amostra</h3>
+                    <input type="text" name="Paciente" placeholder="Nome do Paciente" required list="paciente-datalist">
+                    <select name="Local" required>
+                        <option value="">Local de Entrega</option>
+                        <option value="Clínica">Clínica</option>
+                        <option value="Posto de Saúde">Posto de Saúde</option>
+                        <option value="Família">Família</option>
+                        <option value="Universidade">Universidade</option>
+                    </select>
+                    <input type="text" name="Remedio" placeholder="Remédio (buscar no estoque)" required list="estoque-datalist">
+                    <input type="number" name="Quantidade" placeholder="Quantidade a Entregar" required>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="AgendarLembrete" id="check-lembrete"> Agendar Lembrete?
+                    </label>
+                    <div id="lembrete-fields" class="hidden">
+                        <input type="text" name="TituloLembrete" placeholder="Título do Lembrete">
+                        <input type="datetime-local" name="DataLembrete">
+                    </div>
+                     <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-submit">Confirmar Entrega</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <datalist id="remedio-datalist"></datalist>
+        <datalist id="substancia-datalist"></datalist>
+        <datalist id="categoria-datalist"></datalist>
+        <datalist id="laboratorio-datalist"></datalist>
+        <datalist id="representante-datalist"></datalist>
+        <datalist id="paciente-datalist"></datalist>
+        <datalist id="estoque-datalist"></datalist>
+
+        <div id="loader" class="hidden">
+            <div class="spinner"></div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
