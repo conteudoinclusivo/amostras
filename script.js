@@ -1,5 +1,5 @@
 // ATENÇÃO: Cole aqui a URL da sua API do Google Apps Script
-const API_URL = 'https://script.google.com/macros/s/AKfycbyQFWplufyBqeTHIP-BXRUONWmstb64wyLK7rJACJtmCNv_nv5Lpj6PDrSFpeE1QNYMwg/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbx2WRiZAgdHRw5cs68iWQIigqDpacRFsmib02WqlhnZ_gHz4pCeZqcRugtpwXT1Sluy/exec';
 
 // Elementos da DOM
 const views = document.querySelectorAll('.view');
